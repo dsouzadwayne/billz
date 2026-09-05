@@ -99,7 +99,8 @@ if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   if [ -n "$COMMIT_MSG" ]; then
     git add .
     git commit -m "$COMMIT_MSG"
-    git push
+    BRANCH=$(git branch --show-current 2>/dev/null || echo "main")
+    git push -u origin "$BRANCH" 2>/dev/null || git push
     echo "Git changes committed and pushed!"
   fi
 fi
