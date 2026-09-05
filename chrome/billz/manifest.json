@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "billz",
-  "version": "1.3.1",
+  "version": "0.0.1",
   "description": "Extracts order history, bills, item breakdown, and provides analytics for BigBasket, Swiggy, and Swiggy Instamart.",
   "author": "Dwayne",
   "icons": {
