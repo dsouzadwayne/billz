@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>billz • BigBasket Orders & Bills Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css">
+  <link rel="icon" type="image/png" href="icons/icon48.png">
+</head>
+<body class="dark-mode">
+  <div class="app-layout">
+    <!-- Sidebar / Navigation -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon">🛒</div>
+        <div class="brand-text">
+          <h1>billz</h1>
+        </div>
+      </div>
+
+      <nav class="nav-menu">
+        <button class="nav-item active" data-view="dashboard">
+          <span class="icon">📊</span>
+          <span>Overview</span>
+        </button>
+        <button class="nav-item" data-view="months">
+          <span class="icon">📅</span>
+          <span>Month-Wise Bills</span>
+        </button>
+        <button class="nav-item" data-view="items">
+          <span class="icon">🛍️</span>
+          <span>Items Purchased</span>
+        </button>
+        <button class="nav-item" data-view="price-history">
+          <span class="icon">📈</span>
+          <span>Price History</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-platform-switch">
+        <div class="sidebar-section-title">ACTIVE APP</div>
+        <div class="platform-tabs" id="sidebar-platform-tabs">
+          <button class="platform-tab active" data-platform="all" title="View All Orders">🌐 All</button>
+          <button class="platform-tab" data-platform="bigbasket" title="View BigBasket Orders">🛒 BB</button>
+          <button class="platform-tab" data-platform="swiggy" title="View Swiggy Food Orders">🍔 Swiggy</button>
+          <button class="platform-tab" data-platform="instamart" title="View Swiggy Instamart Orders">⚡ Insta</button>
+        </div>
+      </div>
+
+      <div class="sidebar-actions">
+        <button class="btn-sync" id="btn-sync-bigbasket" title="Crawl & pull fresh orders from BigBasket">
+          <span class="icon">🛒</span>
+          <span>Sync BigBasket</span>
+        </button>
+        <button class="btn-sync btn-sync-swiggy" id="btn-sync-swiggy" title="Sync Swiggy food orders">
+          <span class="icon">🍔</span>
+          <span>Sync Swiggy</span>
+        </button>
+        <button class="btn-sync btn-sync-instamart" id="btn-sync-instamart" title="Sync Instamart grocery orders from instamart.in">
+          <span class="icon">⚡</span>
+          <span>Sync Instamart</span>
+        </button>
+        <button class="btn-secondary" id="btn-export-csv">
+          <span class="icon">📥</span>
+          <span>Export All Bills (CSV)</span>
+        </button>
+        <button class="btn-secondary" id="btn-export-pdf" title="Export monthly bill statement as PDF">
+          <span class="icon">📄</span>
+          <span>Export Month (PDF)</span>
+        </button>
+        <button class="btn-secondary" id="btn-export-json">
+          <span class="icon">📦</span>
+          <span>Export Raw JSON</span>
+        </button>
+        <button class="btn-secondary danger" id="btn-clear-cache" title="Clear all cached orders">
+          <span class="icon">🗑️</span>
+          <span>Clear Cached Orders</span>
+        </button>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="sync-status" id="sidebar-sync-status">Ready</div>
+        <div class="version">billz v1.3 • Multi-App</div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Top Header -->
+      <header class="top-header">
+        <div class="search-bar">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="search-input" placeholder="Search orders, items (Milk, Biryani...), or brands / restaurants...">
+        </div>
+
+        <div class="header-right-actions">
+          <div class="header-filters">
+            <select id="platform-filter" class="select-filter platform-select" title="Switch Platform">
+              <option value="all">🌐 All Apps (Consolidated)</option>
+              <option value="bigbasket">🛒 BigBasket</option>
+              <option value="swiggy">🍔 Swiggy Food</option>
+              <option value="instamart">⚡ Swiggy Instamart</option>
+            </select>
+            <select id="location-filter" class="select-filter location-select" title="Filter by Delivery Location">
+              <option value="all">📍 All Delivery Locations</option>
+            </select>
+            <select id="month-filter" class="select-filter">
+              <option value="all">All Months</option>
+            </select>
+            <select id="status-filter" class="select-filter">
+              <option value="all">All Valid Orders</option>
+              <option value="paid">Paid (UPI / Online)</option>
+              <option value="cod">Cash On Delivery</option>
+            </select>
+          </div>
+
+          <!-- Dark / Light Mode Toggle Button -->
+          <button id="theme-toggle-btn" class="theme-toggle-btn" title="Toggle Theme" aria-label="Toggle Theme">
+            <span id="theme-toggle-icon">☀️</span>
+            <span id="theme-toggle-label">Light Mode</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- KPI Summary Cards -->
+      <section class="kpi-grid">
+        <div class="kpi-card total-spent">
+          <div class="kpi-header">
+            <span class="kpi-title">Total Spend</span>
+            <span class="kpi-icon">💰</span>
+          </div>
+          <div class="kpi-value" id="kpi-total-spent">₹0</div>
+          <div class="kpi-sub" id="kpi-avg-order">Avg ₹0 / order</div>
+        </div>
+
+        <div class="kpi-card total-orders">
+          <div class="kpi-header">
+            <span class="kpi-title">Total Orders</span>
+            <span class="kpi-icon">📦</span>
+          </div>
+          <div class="kpi-value" id="kpi-total-orders">0</div>
+          <div class="kpi-sub" id="kpi-months-count">across 0 months</div>
+        </div>
+
+        <div class="kpi-card total-savings">
+          <div class="kpi-header">
+            <span class="kpi-title">Total Saved</span>
+            <span class="kpi-icon">🏷️</span>
+          </div>
+          <div class="kpi-value" id="kpi-total-savings">₹0</div>
+          <div class="kpi-sub">Discounts & Offers</div>
+        </div>
+
+        <div class="kpi-card total-items">
+          <div class="kpi-header">
+            <span class="kpi-title">Items Bought</span>
+            <span class="kpi-icon">🛍️</span>
+          </div>
+          <div class="kpi-value" id="kpi-total-items">0</div>
+          <div class="kpi-sub" id="kpi-unique-items">0 unique products</div>
+        </div>
+      </section>
+
+      <!-- Dynamic Content Sections -->
+      <div id="content-container">
+
+        <!-- 1. Overview Section (Spotlight Statistics) -->
+        <section class="dashboard-section" id="section-overview">
+          <div class="section-header">
+            <h2>📊 Spending & Grocery Analytics</h2>
+            <span class="section-desc">Key statistics, record purchases, and high-frequency groceries</span>
+          </div>
+
+          <div class="stats-spotlight-grid">
+            <!-- Most Expensive Order Spotlight -->
+            <div class="spotlight-card expensive-order-card" id="card-expensive-order">
+              <div class="spotlight-badge">🏆 Record Order</div>
+              <h3>Most Expensive Order</h3>
+              <div class="spotlight-amount" id="stat-expensive-amount">₹0</div>
+              <div class="spotlight-meta">
+                <div class="spotlight-meta-row">
+                  <span class="meta-lbl">Date:</span>
+                  <span class="meta-val" id="stat-expensive-date">-</span>
+                </div>
+                <div class="spotlight-meta-row">
+                  <span class="meta-lbl">Order ID:</span>
+                  <span class="meta-val monospace" id="stat-expensive-id">-</span>
+                </div>
+                <div class="spotlight-meta-row">
+                  <span class="meta-lbl">Payment:</span>
+                  <span class="meta-val" id="stat-expensive-payment">-</span>
+                </div>
+              </div>
+
+              <div class="spotlight-items-preview">
+                <span class="preview-title">Key Items In Order:</span>
+                <div class="preview-chips-list" id="stat-expensive-items-list">
+                  <!-- Populated via JS -->
+                </div>
+              </div>
+
+              <button class="btn-spotlight-action" id="btn-view-expensive-receipt" data-action="view-receipt">
+                <span>View Full Receipt</span> ➔
+              </button>
+            </div>
+
+            <!-- Top Spending Month Spotlight -->
+            <div class="spotlight-card month-spotlight-card">
+              <div class="spotlight-badge">📅 Peak Spend</div>
+              <h3>Highest Spending Month</h3>
+              <div class="spotlight-amount" id="stat-peak-month-amount">₹0</div>
+              <div class="spotlight-meta">
+                <div class="spotlight-meta-row">
+                  <span class="meta-lbl">Month:</span>
+                  <strong class="meta-val" id="stat-peak-month-name">-</strong>
+                </div>
+                <div class="spotlight-meta-row">
+                  <span class="meta-lbl">Orders Count:</span>
+                  <span class="meta-val" id="stat-peak-month-orders">0 orders</span>
+                </div>
+                <div class="spotlight-meta-row">
+                  <span class="meta-lbl">Avg Spend / Order:</span>
+                  <span class="meta-val" id="stat-peak-month-avg">₹0</span>
+                </div>
+              </div>
+              <div class="spotlight-note">Plan your grocery budget by checking high-consumption periods.</div>
+            </div>
+          </div>
+
+          <!-- Statistics Grid: Most Ordered Items & Top Brands -->
+          <div class="analytics-split-grid">
+            <!-- Items Most Ordered Leaderboard -->
+            <div class="spotlight-card leaderboard-card">
+              <div class="card-header-flex">
+                <h3>🛒 Top Most Ordered Items</h3>
+                <span class="card-sub-tag">By Units & Frequency</span>
+              </div>
+              <div class="leaderboard-list" id="leaderboard-items-list">
+                <!-- Populated via JS -->
+              </div>
+            </div>
+
+            <!-- Top Brands by Expense -->
+            <div class="spotlight-card leaderboard-card">
+              <div class="card-header-flex">
+                <h3>🏷️ Top Brands by Spend</h3>
+                <span class="card-sub-tag">Where Your Money Goes</span>
+              </div>
+              <div class="leaderboard-list" id="leaderboard-brands-list">
+                <!-- Populated via JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Delivery Location Spend Bifurcation -->
+          <div class="spotlight-card leaderboard-card location-bifurcation-card">
+            <div class="card-header-flex">
+              <div>
+                <h3>📍 Spend by Delivery Location</h3>
+                <span class="card-sub-tag">Bifurcation of spend, orders & basket size across your delivery addresses</span>
+              </div>
+              <span class="location-badge-pill" id="stat-locations-count-badge">0 Locations</span>
+            </div>
+            <div class="leaderboard-list" id="leaderboard-locations-list">
+              <!-- Populated via JS -->
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. Month-Wise Bills Section (With In-Order Items) -->
+        <section class="dashboard-section" id="section-months" style="display: none;">
+          <div class="section-header-flex">
+            <div>
+              <h2>📅 Month-Wise Breakdown & Bills</h2>
+              <span class="section-desc">Itemized receipts and purchases ordered month-by-month</span>
+            </div>
+            <div class="section-actions-right">
+              <button class="btn-pill" id="btn-export-current-month-pdf" title="Export monthly breakdown as PDF statement">📄 Export Month (PDF)</button>
+              <button class="btn-pill" id="btn-toggle-all-months">Toggle All Months</button>
+            </div>
+          </div>
+
+          <div id="months-accordion" class="accordion-list">
+            <!-- Populated via JavaScript -->
+          </div>
+        </section>
+
+        <!-- 3. All Items Purchased Section -->
+        <section class="dashboard-section" id="section-items" style="display: none;">
+          <div class="section-header">
+            <h2>🛍️ All Purchased Items</h2>
+            <span class="section-desc">Search, sort, and analyze every single item ever bought</span>
+          </div>
+
+          <div class="items-table-wrap">
+            <table class="items-table">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Brand</th>
+                  <th>Weight</th>
+                  <th>Quantity</th>
+                  <th>Unit Price</th>
+                  <th>Total Spent</th>
+                  <th>Order Date</th>
+                  <th>Order No</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="items-table-body">
+                <!-- Populated via JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 4. Price History & Item Explorer Section -->
+        <section class="dashboard-section" id="section-price-history" style="display: none;">
+          <div class="section-header">
+            <h2>📈 Price History & Product Explorer</h2>
+            <span class="section-desc">Track price changes, discounts, and purchase dates for any grocery item</span>
+          </div>
+
+          <!-- Product Picker Controls -->
+          <div class="price-explorer-controls">
+            <div class="picker-search-box">
+              <label for="price-product-select">Select a Product to View Price History:</label>
+              <div class="select-wrapper">
+                <select id="price-product-select" class="product-dropdown">
+                  <option value="">-- Choose an Ordered Product --</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Quick pick chips -->
+            <div class="quick-picks-container">
+              <span class="quick-picks-label">⚡ Quick Select Top Items:</span>
+              <div class="quick-picks-chips" id="quick-picks-chips">
+                <!-- Populated via JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Price History Output Container -->
+          <div id="price-history-content" class="price-history-content" style="display: none;">
+            <!-- Product Overview Card -->
+            <div class="product-price-summary-card">
+              <div class="product-hero-info">
+                <div class="product-hero-image" id="ph-image-box">🛍️</div>
+                <div class="product-hero-details">
+                  <h3 id="ph-product-name">Product Name</h3>
+                  <div class="product-hero-sub">
+                    <span class="badge-brand" id="ph-brand">-</span>
+                    <span class="badge-weight" id="ph-weight">-</span>
+                  </div>
+                  <div class="product-variant-switcher" id="ph-variant-switcher" style="display: none;">
+                    <!-- Sibling pack sizes rendered here, e.g. [1 L] [200 ml] -->
+                  </div>
+                </div>
+              </div>
+
+              <!-- Price Stats Cards -->
+              <div class="price-stats-mini-grid">
+                <div class="price-stat-box">
+                  <span class="price-stat-label">Lowest Price Paid</span>
+                  <span class="price-stat-val text-green" id="ph-lowest-price">₹0</span>
+                  <span class="price-stat-sub" id="ph-lowest-date">-</span>
+                </div>
+                <div class="price-stat-box">
+                  <span class="price-stat-label">Highest Price Paid</span>
+                  <span class="price-stat-val text-red" id="ph-highest-price">₹0</span>
+                  <span class="price-stat-sub" id="ph-highest-date">-</span>
+                </div>
+                <div class="price-stat-box">
+                  <span class="price-stat-label">Latest Price Paid</span>
+                  <span class="price-stat-val text-primary" id="ph-latest-price">₹0</span>
+                  <span class="price-stat-sub" id="ph-latest-date">-</span>
+                </div>
+                <div class="price-stat-box">
+                  <span class="price-stat-label">Price Trend</span>
+                  <span class="price-trend-badge" id="ph-trend-badge">No Change</span>
+                  <span class="price-stat-sub" id="ph-total-units">0 total units</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Purchase Timeline Table -->
+            <div class="price-timeline-section">
+              <h3>📜 Purchase History Timeline (<span id="ph-timeline-count">0</span> Orders)</h3>
+              <div class="timeline-table-wrap">
+                <table class="items-table timeline-table">
+                  <thead>
+                    <tr>
+                      <th>Purchase Date</th>
+                      <th>Order ID</th>
+                      <th>Qty Bought</th>
+                      <th>Unit Price Paid</th>
+                      <th>Price Change</th>
+                      <th>Total Amount</th>
+                      <th>Savings</th>
+                      <th>Receipt</th>
+                    </tr>
+                  </thead>
+                  <tbody id="ph-timeline-body">
+                    <!-- Populated via JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Empty State when no product chosen -->
+          <div id="price-history-empty" class="price-history-empty-state">
+            <span class="empty-icon">📈</span>
+            <h3>No Product Selected</h3>
+            <p>Select a product from the dropdown above or click any top item chip to inspect its purchase timeline and price trends.</p>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Order Receipt Detail Modal -->
+  <div class="modal-overlay" id="order-modal" style="display: none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <h3 id="modal-order-title">Order Details</h3>
+          <span class="modal-sub" id="modal-order-sub">Order Number</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <button class="btn-modal-print" id="btn-modal-print-receipt" title="Print or Save Order Receipt as PDF">
+            🖨️ Print / PDF
+          </button>
+          <button class="modal-close" id="modal-close-btn" aria-label="Close modal">✕</button>
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <!-- Order Metadata Grid -->
+        <div class="receipt-meta-grid">
+          <div class="meta-box">
+            <span class="meta-label">📅 Delivery Date</span>
+            <span class="meta-value" id="modal-date">-</span>
+          </div>
+          <div class="meta-box">
+            <span class="meta-label">💳 Payment Method</span>
+            <span class="meta-value" id="modal-payment">-</span>
+          </div>
+          <div class="meta-box">
+            <span class="meta-label">🚚 Delivery Status</span>
+            <span class="meta-value" id="modal-status">-</span>
+          </div>
+          <div class="meta-box">
+            <span class="meta-label">📍 Delivery Address</span>
+            <span class="meta-value" id="modal-address">-</span>
+          </div>
+        </div>
+
+        <!-- Receipt Totals -->
+        <div class="receipt-totals-bar">
+          <div class="total-item">
+            <span>Subtotal:</span>
+            <strong id="modal-subtotal">₹0</strong>
+          </div>
+          <div class="total-item">
+            <span>Savings:</span>
+            <strong id="modal-savings" style="color: #10b981;">₹0</strong>
+          </div>
+          <div class="total-item grand-total">
+            <span>Total Paid:</span>
+            <strong id="modal-total" style="color: #10b981;">₹0</strong>
+          </div>
+        </div>
+
+        <!-- Itemized Table -->
+        <div class="receipt-items-section">
+          <h4>Items In This Order (<span id="modal-items-count">0</span>)</h4>
+          <div class="receipt-items-list" id="modal-items-list">
+            <!-- Populated via JavaScript -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Printable Statement Container (Active only during Print / PDF export) -->
+  <div id="print-statement-container" class="print-only"></div>
+
+  <script src="core/schema.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>

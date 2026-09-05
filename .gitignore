@@ -1,0 +1,13 @@
+# Release archives
+*.zip
+chrome/billz.zip
+firefox/billz.zip
+
+# Development recordings & traffic dumps
+sample_data/
+
+# OS & Python artifacts
+.DS_Store
+Thumbs.db
+__pycache__/
+*.pyc

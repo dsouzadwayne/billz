@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>billz</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="header">
+    <div class="title-wrap">
+      <div class="icon">🛒</div>
+      <div>
+        <div class="title">billz</div>
+        <div class="subtitle">BigBasket • Swiggy • Instamart</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+    <button class="action-btn hero" id="btn-open-dashboard">
+      <span>📊</span>
+      <span>Open Full Bills Dashboard</span>
+    </button>
+
+    <div class="status-card">
+      <div class="status-row">
+        <span class="status-label">Total Orders Tracked:</span>
+        <span class="status-value" id="stat-orders">0</span>
+      </div>
+      <div class="status-row">
+        <span class="status-label">Total Amount Spent:</span>
+        <span class="status-value" style="color: #059669;" id="stat-spent">₹0</span>
+      </div>
+      <div class="status-row">
+        <span class="status-label">Months Tracked:</span>
+        <span class="status-value" id="stat-months">0</span>
+      </div>
+    </div>
+
+    <div class="section-title">Quick Exports</div>
+    <div class="button-group">
+      <button class="action-btn primary" id="btn-save-csv">
+        <span>📄</span>
+        <span>Download CSV</span>
+      </button>
+      <button class="action-btn" id="btn-save-json">
+        <span>📦</span>
+        <span>Download JSON</span>
+      </button>
+    </div>
+    <button class="action-btn" id="btn-export-pdf" style="margin-top: 8px; width: 100%; justify-content: center; background: linear-gradient(135deg, #059669 0%, #047857 100%); color: #ffffff; border-color: #059669;">
+      <span>📄</span>
+      <span>Export Month Statement (PDF)</span>
+    </button>
+
+    <div class="section-title">Open App Orders</div>
+    <div class="button-group">
+      <button class="nav-btn" id="open-myorders" title="Open BigBasket orders">
+        <span>🛒</span>
+        <span>BigBasket</span>
+      </button>
+      <button class="nav-btn" id="open-swiggy" title="Open Swiggy orders">
+        <span>🍔</span>
+        <span>Swiggy</span>
+      </button>
+      <button class="nav-btn" id="open-instamart" title="Open Instamart orders">
+        <span>⚡</span>
+        <span>Instamart</span>
+      </button>
+    </div>
+
+    <button class="btn-clear" id="btn-clear-cache">Clear Cached Orders</button>
+  </div>
+
+  <div class="footer">
+    <span>View item breakdowns & receipts in the <b>Dashboard</b></span>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

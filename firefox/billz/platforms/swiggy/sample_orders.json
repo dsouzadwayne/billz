@@ -1,0 +1,182 @@
+[
+  {
+    "platform": "swiggy",
+    "orderNumber": "SWG-1829304812",
+    "orderId": "1829304812",
+    "date": "2026-09-03",
+    "displayDate": "Thu 03 Sep 2026",
+    "deliverySlot": "Delivered in 35 mins",
+    "deliveryTime": "3rd Sep, 8:45 PM",
+    "monthKey": "September 2026",
+    "amount": 540.0,
+    "subtotal": 590.0,
+    "savings": 50.0,
+    "paymentStatus": "Paid (UPI)",
+    "paymentMethod": "UPI",
+    "deliveryStatus": "Delivered",
+    "address": "Dwayne Dsouza, 130, Emvee Villa, Ground Floor, Bhayandar West, Mumbai - 401101",
+    "storeName": "Meghana Foods",
+    "itemsCount": 2,
+    "items": [
+      {
+        "name": "Special Chicken Biryani",
+        "brand": "Meghana Foods",
+        "category": "Biryani",
+        "weight": "Serves 1-2",
+        "quantity": 1,
+        "unitPrice": 380.0,
+        "mrp": 380.0,
+        "totalPrice": 380.0,
+        "savings": 0.0,
+        "isVeg": false
+      },
+      {
+        "name": "Paneer 65",
+        "brand": "Meghana Foods",
+        "category": "Starters",
+        "weight": "8 Pcs",
+        "quantity": 1,
+        "unitPrice": 210.0,
+        "mrp": 210.0,
+        "totalPrice": 210.0,
+        "savings": 0.0,
+        "isVeg": true
+      }
+    ]
+  },
+  {
+    "platform": "swiggy",
+    "orderNumber": "SWG-1811209384",
+    "orderId": "1811209384",
+    "date": "2026-08-28",
+    "displayDate": "Fri 28 Aug 2026",
+    "deliverySlot": "Delivered in 28 mins",
+    "deliveryTime": "28th Aug, 1:15 PM",
+    "monthKey": "August 2026",
+    "amount": 389.0,
+    "subtotal": 450.0,
+    "savings": 61.0,
+    "paymentStatus": "Paid (Credit Card)",
+    "paymentMethod": "Credit Card",
+    "deliveryStatus": "Delivered",
+    "address": "Office - Dwayne Dsouza, Unit 402, Mindspace IT Park, Malad West, Mumbai - 400064",
+    "storeName": "Truffles",
+    "itemsCount": 2,
+    "items": [
+      {
+        "name": "All American Cheese Burger",
+        "brand": "Truffles",
+        "category": "Burgers",
+        "weight": "Regular",
+        "quantity": 1,
+        "unitPrice": 240.0,
+        "mrp": 240.0,
+        "totalPrice": 240.0,
+        "savings": 0.0,
+        "isVeg": false
+      },
+      {
+        "name": "Peri Peri French Fries",
+        "brand": "Truffles",
+        "category": "Sides",
+        "weight": "Large",
+        "quantity": 1,
+        "unitPrice": 149.0,
+        "mrp": 149.0,
+        "totalPrice": 149.0,
+        "savings": 0.0,
+        "isVeg": true
+      }
+    ]
+  },
+  {
+    "platform": "swiggy",
+    "orderNumber": "SWG-1798402911",
+    "orderId": "1798402911",
+    "date": "2026-08-15",
+    "displayDate": "Sat 15 Aug 2026",
+    "deliverySlot": "Delivered in 42 mins",
+    "deliveryTime": "15th Aug, 9:10 PM",
+    "monthKey": "August 2026",
+    "amount": 720.0,
+    "subtotal": 850.0,
+    "savings": 130.0,
+    "paymentStatus": "Paid (UPI)",
+    "paymentMethod": "UPI",
+    "deliveryStatus": "Delivered",
+    "address": "Dwayne Dsouza, Flat 501, Raheja Complex, Bandra West, Mumbai - 400050",
+    "storeName": "Punjab Grill",
+    "itemsCount": 3,
+    "items": [
+      {
+        "name": "Butter Chicken",
+        "brand": "Punjab Grill",
+        "category": "Main Course",
+        "weight": "500 ml",
+        "quantity": 1,
+        "unitPrice": 480.0,
+        "mrp": 480.0,
+        "totalPrice": 480.0,
+        "savings": 0.0,
+        "isVeg": false
+      },
+      {
+        "name": "Garlic Naan",
+        "brand": "Punjab Grill",
+        "category": "Breads",
+        "weight": "2 pcs",
+        "quantity": 2,
+        "unitPrice": 90.0,
+        "mrp": 90.0,
+        "totalPrice": 180.0,
+        "savings": 0.0,
+        "isVeg": true
+      }
+    ]
+  },
+  {
+    "platform": "swiggy",
+    "orderNumber": "SWG-1763920194",
+    "orderId": "1763920194",
+    "date": "2026-07-22",
+    "displayDate": "Wed 22 Jul 2026",
+    "deliverySlot": "Delivered in 30 mins",
+    "deliveryTime": "22nd Jul, 7:50 PM",
+    "monthKey": "July 2026",
+    "amount": 420.0,
+    "subtotal": 470.0,
+    "savings": 50.0,
+    "paymentStatus": "Paid (UPI)",
+    "paymentMethod": "UPI",
+    "deliveryStatus": "Delivered",
+    "address": "Dwayne Dsouza, 130, Emvee Villa, Ground Floor, Bhayandar West, Mumbai - 401101",
+    "storeName": "Subway",
+    "itemsCount": 2,
+    "items": [
+      {
+        "name": "Roasted Chicken Strip Sub (15 cm)",
+        "brand": "Subway",
+        "category": "Sandwiches",
+        "weight": "6 Inch",
+        "quantity": 1,
+        "unitPrice": 290.0,
+        "mrp": 290.0,
+        "totalPrice": 290.0,
+        "savings": 0.0,
+        "isVeg": false
+      },
+      {
+        "name": "Double Dark Chocolate Cookie",
+        "brand": "Subway",
+        "category": "Desserts",
+        "weight": "1 pc",
+        "quantity": 2,
+        "unitPrice": 65.0,
+        "mrp": 65.0,
+        "totalPrice": 130.0,
+        "savings": 0.0,
+        "isVeg": true
+      }
+    ]
+  }
+]

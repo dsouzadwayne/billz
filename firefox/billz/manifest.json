@@ -1,0 +1,114 @@
+{
+  "manifest_version": 3,
+  "name": "billz",
+  "version": "1.3.0",
+  "description": "Extracts order history, bills, item breakdown, and provides analytics for BigBasket, Swiggy, and Swiggy Instamart.",
+  "author": "Dwayne",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "billz@dsouzadwayne",
+      "strict_min_version": "128.0"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png"
+    },
+    "default_title": "billz"
+  },
+  "permissions": [
+    "storage",
+    "downloads",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "*://*.bigbasket.com/*",
+    "*://*.swiggy.com/*",
+    "*://*.instamart.in/*"
+  ],
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.bigbasket.com/*"],
+      "js": ["platforms/bigbasket/injected.js"],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": ["*://*.bigbasket.com/*"],
+      "js": [
+        "core/schema.js",
+        "platforms/bigbasket/parser.js",
+        "platforms/bigbasket/content.js"
+      ],
+      "css": [
+        "platforms/bigbasket/content.css"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["*://*.swiggy.com/*"],
+      "js": ["platforms/swiggy/injected.js"],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": ["*://*.swiggy.com/*"],
+      "js": [
+        "core/schema.js",
+        "platforms/swiggy/parser.js",
+        "platforms/instamart/parser.js",
+        "platforms/swiggy/content.js"
+      ],
+      "css": [
+        "platforms/swiggy/content.css"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["*://*.instamart.in/*"],
+      "js": ["platforms/instamart/injected.js"],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": ["*://*.instamart.in/*"],
+      "js": [
+        "core/schema.js",
+        "platforms/instamart/parser.js",
+        "platforms/instamart/content.js"
+      ],
+      "css": [
+        "platforms/instamart/content.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "core/*",
+        "platforms/*",
+        "icons/*",
+        "dashboard.html",
+        "dashboard.js",
+        "dashboard.css",
+        "sample_orders.json"
+      ],
+      "matches": [
+        "*://*.bigbasket.com/*",
+        "*://*.swiggy.com/*",
+        "*://*.instamart.in/*"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,173 @@
+[
+  {
+    "platform": "instamart",
+    "orderNumber": "INSTA-9182049281",
+    "orderId": "9182049281",
+    "date": "2026-09-01",
+    "displayDate": "Tue 01 Sep 2026",
+    "deliverySlot": "Delivered in 12 mins",
+    "deliveryTime": "1st Sep, 9:22 AM",
+    "monthKey": "September 2026",
+    "amount": 345.0,
+    "subtotal": 395.0,
+    "savings": 50.0,
+    "paymentStatus": "Paid (UPI)",
+    "paymentMethod": "UPI",
+    "deliveryStatus": "Delivered",
+    "address": "Dwayne Dsouza, 130, Emvee Villa, Ground Floor, Bhayandar West, Mumbai - 401101",
+    "storeName": "Swiggy Instamart (Bhayandar Pod)",
+    "itemsCount": 3,
+    "items": [
+      {
+        "name": "Amul Taaza Homogenised Milk",
+        "brand": "Amul",
+        "category": "Dairy",
+        "weight": "1 L",
+        "quantity": 2,
+        "unitPrice": 75.0,
+        "mrp": 77.0,
+        "totalPrice": 150.0,
+        "savings": 4.0,
+        "isVeg": true
+      },
+      {
+        "name": "Modern 100% Whole Wheat Bread",
+        "brand": "Modern",
+        "category": "Bakery",
+        "weight": "400 g",
+        "quantity": 1,
+        "unitPrice": 55.0,
+        "mrp": 60.0,
+        "totalPrice": 55.0,
+        "savings": 5.0,
+        "isVeg": true
+      },
+      {
+        "name": "Farm Fresh White Eggs",
+        "brand": "Eggoz",
+        "category": "Eggs",
+        "weight": "Pack of 6",
+        "quantity": 2,
+        "unitPrice": 70.0,
+        "mrp": 85.0,
+        "totalPrice": 140.0,
+        "savings": 30.0,
+        "isVeg": false
+      }
+    ]
+  },
+  {
+    "platform": "instamart",
+    "orderNumber": "INSTA-9155029184",
+    "orderId": "9155029184",
+    "date": "2026-08-20",
+    "displayDate": "Thu 20 Aug 2026",
+    "deliverySlot": "Delivered in 14 mins",
+    "deliveryTime": "20th Aug, 6:40 PM",
+    "monthKey": "August 2026",
+    "amount": 480.0,
+    "subtotal": 560.0,
+    "savings": 80.0,
+    "paymentStatus": "Paid (UPI)",
+    "paymentMethod": "UPI",
+    "deliveryStatus": "Delivered",
+    "address": "Dwayne Dsouza, 130, Emvee Villa, Ground Floor, Bhayandar West, Mumbai - 401101",
+    "storeName": "Swiggy Instamart (Bhayandar Pod)",
+    "itemsCount": 4,
+    "items": [
+      {
+        "name": "Coca-Cola Zero Sugar",
+        "brand": "Coca-Cola",
+        "category": "Beverages",
+        "weight": "750 ml",
+        "quantity": 2,
+        "unitPrice": 40.0,
+        "mrp": 45.0,
+        "totalPrice": 80.0,
+        "savings": 10.0,
+        "isVeg": true
+      },
+      {
+        "name": "Lay's India's Magic Masala Chips",
+        "brand": "Lay's",
+        "category": "Snacks",
+        "weight": "90 g",
+        "quantity": 2,
+        "unitPrice": 35.0,
+        "mrp": 40.0,
+        "totalPrice": 70.0,
+        "savings": 10.0,
+        "isVeg": true
+      },
+      {
+        "name": "Fresh Cavendish Bananas",
+        "brand": "Fresh Produce",
+        "category": "Fruits",
+        "weight": "1 kg (approx 6-8 pcs)",
+        "quantity": 1,
+        "unitPrice": 65.0,
+        "mrp": 80.0,
+        "totalPrice": 65.0,
+        "savings": 15.0,
+        "isVeg": true
+      },
+      {
+        "name": "Aashirvaad Shudh Chakki Atta",
+        "brand": "Aashirvaad",
+        "category": "Foodgrains",
+        "weight": "5 kg",
+        "quantity": 1,
+        "unitPrice": 265.0,
+        "mrp": 310.0,
+        "totalPrice": 265.0,
+        "savings": 45.0,
+        "isVeg": true
+      }
+    ]
+  },
+  {
+    "platform": "instamart",
+    "orderNumber": "INSTA-9110482910",
+    "orderId": "9110482910",
+    "date": "2026-08-05",
+    "displayDate": "Wed 05 Aug 2026",
+    "deliverySlot": "Delivered in 11 mins",
+    "deliveryTime": "5th Aug, 11:15 AM",
+    "monthKey": "August 2026",
+    "amount": 290.0,
+    "subtotal": 320.0,
+    "savings": 30.0,
+    "paymentStatus": "Paid (UPI)",
+    "paymentMethod": "UPI",
+    "deliveryStatus": "Delivered",
+    "address": "Office - Dwayne Dsouza, Unit 402, Mindspace IT Park, Malad West, Mumbai - 400064",
+    "storeName": "Swiggy Instamart (Malad Pod)",
+    "itemsCount": 2,
+    "items": [
+      {
+        "name": "Nescafe Classic Instant Coffee",
+        "brand": "Nescafe",
+        "category": "Beverages",
+        "weight": "100 g Jar",
+        "quantity": 1,
+        "unitPrice": 210.0,
+        "mrp": 230.0,
+        "totalPrice": 210.0,
+        "savings": 20.0,
+        "isVeg": true
+      },
+      {
+        "name": "Tata Salt Vacuum Evaporated",
+        "brand": "Tata",
+        "category": "Groceries",
+        "weight": "1 kg",
+        "quantity": 2,
+        "unitPrice": 40.0,
+        "mrp": 45.0,
+        "totalPrice": 80.0,
+        "savings": 10.0,
+        "isVeg": true
+      }
+    ]
+  }
+]
